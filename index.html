@@ -1,0 +1,2052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>China Frontiers — Robotics, AI & Innovation Exchange</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FAFAF8;
+            --surface: #FFFFFF;
+            --text: #1A1A1A;
+            --text-secondary: #71717A;
+            --text-tertiary: #A1A1AA;
+            --border: #E4E4E7;
+            --border-light: #F4F4F5;
+            --accent: #1E3A5F;
+            --accent-light: #EDF2F7;
+            --red: #DC2626;
+            --red-light: #FEF2F2;
+            --gold: #B45309;
+            --gold-light: #FFFBEB;
+            --green: #16A34A;
+            --green-light: #F0FDF4;
+            --blue: #2563EB;
+            --blue-light: #EFF6FF;
+            --purple: #7C3AED;
+            --purple-light: #F5F3FF;
+            --orange: #EA580C;
+            --orange-light: #FFF7ED;
+            --teal: #0D9488;
+            --teal-light: #F0FDFA;
+            --pink: #DB2777;
+            --pink-light: #FDF2F8;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --radius-lg: 20px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-lg: 0 4px 12px rgba(0,0,0,0.06);
+            --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.65;
+            font-size: 15px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ═══ SCROLLBAR ═══ */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
+
+        /* ═══ HERO ═══ */
+        .hero {
+            position: relative;
+            background: var(--accent);
+            color: white;
+            overflow: hidden;
+            padding: 100px 0 80px;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(255,255,255,0.06), transparent),
+                radial-gradient(ellipse 60% 60% at 80% 70%, rgba(220,38,38,0.05), transparent);
+        }
+        .hero-inner {
+            position: relative;
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 32px;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 28px;
+            color: rgba(255,255,255,0.8);
+        }
+        .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #4ADE80; }
+        .hero h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.5rem, 5vw, 3.6rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+        .hero p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.65);
+            max-width: 620px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+        .hero-stat {
+            text-align: center;
+        }
+        .hero-stat .num {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2rem;
+            color: white;
+            line-height: 1.2;
+        }
+        .hero-stat .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 2px;
+        }
+
+        /* ═══ NAV ═══ */
+        .nav-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(250,250,248,0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            padding: 16px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-tertiary);
+            text-decoration: none;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        .nav a:hover { color: var(--text); }
+        .nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+        /* ═══ LAYOUT ═══ */
+        .content { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+        .section {
+            padding: 72px 0;
+        }
+        .section + .section { border-top: 1px solid var(--border); }
+
+        .section-eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 8px;
+        }
+        .section-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 400;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+        .section-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        /* ═══ GRID HELPERS ═══ */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 16px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+
+        /* ═══ OVERVIEW CARDS ═══ */
+        .ov-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            transition: var(--transition);
+        }
+        .ov-card:hover { box-shadow: var(--shadow-lg); border-color: var(--border); }
+        .ov-card .ov-icon {
+            width: 36px; height: 36px;
+            border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px;
+            margin-bottom: 14px;
+        }
+        .ov-card h3 { font-size: 0.92rem; font-weight: 600; margin-bottom: 6px; }
+        .ov-card p { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6; }
+
+        /* ═══ CITY SECTION ═══ */
+        .city {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+        .city-top {
+            padding: 32px 36px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .city-name {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+        }
+        .city-name span {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 400;
+            color: var(--text-tertiary);
+            display: block;
+            margin-top: 4px;
+        }
+        .city-pills { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+        .city-pill {
+            text-align: center;
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            padding: 8px 14px;
+        }
+        .city-pill .v {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--accent);
+        }
+        .city-pill .l {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-tertiary);
+        }
+
+        .city-body { padding: 0 36px 36px; }
+
+        .callout {
+            margin: 24px 0;
+            padding: 16px 20px;
+            background: var(--gold-light);
+            border-radius: var(--radius-sm);
+            font-size: 0.84rem;
+            color: var(--gold);
+            line-height: 1.6;
+            border-left: 3px solid #D97706;
+        }
+        .callout strong { color: #92400E; }
+
+        /* ═══ WEEK DIVIDER ═══ */
+        .week-div {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 32px 0 16px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+        .week-div::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ═══ DAY ROW ═══ */
+        .day-row {
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 20px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .day-row:last-child { border-bottom: none; }
+        .day-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding-top: 2px;
+        }
+        .day-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+        .day-info p {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 6px;
+        }
+        .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+        .tag {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .tag-co { background: var(--blue-light); color: var(--blue); }
+        .tag-uni { background: var(--purple-light); color: var(--purple); }
+        .tag-cult { background: var(--orange-light); color: var(--orange); }
+        .tag-work { background: var(--teal-light); color: var(--teal); }
+        .tag-exch { background: var(--pink-light); color: var(--pink); }
+        .tag-trav { background: var(--border-light); color: var(--text-secondary); }
+        .tag-flex { background: var(--gold-light); color: var(--gold); }
+        .tag-gov { background: var(--green-light); color: var(--green); }
+
+        /* ═══ COMPANY CARDS ═══ */
+        .co-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; margin-top: 20px; }
+        .co-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            transition: var(--transition);
+        }
+        .co-card:hover { box-shadow: var(--shadow); border-color: #D4D4D8; }
+        .co-card-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        .co-card h4 { font-size: 0.9rem; font-weight: 600; }
+        .co-card .co-zh { font-size: 0.75rem; color: var(--text-tertiary); margin-top: 1px; }
+        .co-card .co-sector {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--red);
+            background: var(--red-light);
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            align-self: flex-start;
+        }
+        .co-card p { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; margin-top: 8px; }
+        .co-card .co-why {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-light);
+            font-size: 0.78rem;
+            color: var(--accent);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        /* ═══ TOGGLE SECTIONS ═══ */
+        .toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 20px;
+            padding: 8px 16px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--accent);
+            background: var(--accent-light);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .toggle-btn:hover { background: #DCE8F5; }
+        .toggle-btn .arrow { transition: transform 0.2s; font-size: 10px; }
+        .toggle-btn.open .arrow { transform: rotate(180deg); }
+        .toggle-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .toggle-content.open {
+            max-height: 5000px;
+        }
+
+        /* ═══ MODULE TABS ═══ */
+        .mod-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+        .mod-tab {
+            padding: 8px 18px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--surface);
+            color: var(--text-secondary);
+        }
+        .mod-tab:hover { border-color: var(--accent); color: var(--accent); }
+        .mod-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .mod-panel { display: none; }
+        .mod-panel.active { display: block; }
+
+        /* ═══ TABLES ═══ */
+        .clean-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+            margin-top: 16px;
+        }
+        .clean-table thead th {
+            text-align: left;
+            padding: 10px 14px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-tertiary);
+            border-bottom: 2px solid var(--border);
+            background: var(--bg);
+        }
+        .clean-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border-light);
+            vertical-align: top;
+        }
+        .clean-table tbody tr:hover { background: var(--bg); }
+        .clean-table .row-total {
+            background: var(--accent) !important;
+            color: white;
+            font-weight: 600;
+        }
+        .clean-table .row-total td { border-bottom: none; }
+        .clean-table .row-sub {
+            background: var(--border-light);
+            font-weight: 600;
+        }
+        .clean-table .row-header td {
+            background: var(--accent-light);
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 14px;
+        }
+
+        /* ═══ TRANSPORT ═══ */
+        .route-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            transition: var(--transition);
+        }
+        .route-card:hover { box-shadow: var(--shadow); }
+        .route-card .route-name {
+            font-weight: 600;
+            font-size: 0.92rem;
+            margin-bottom: 4px;
+        }
+        .route-card .route-name .arr { color: var(--red); margin: 0 4px; }
+        .route-card .route-detail {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .route-card .route-price {
+            margin-top: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--accent);
+        }
+        .route-card .route-price small {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.72rem;
+            color: var(--text-tertiary);
+            font-weight: 400;
+        }
+
+        /* ═══ LOGISTICS BOXES ═══ */
+        .info-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+        }
+        .info-box h3 {
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .info-box h3 .ib-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .info-box ul { list-style: none; }
+        .info-box li {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            padding: 3px 0 3px 18px;
+            position: relative;
+            line-height: 1.6;
+        }
+        .info-box li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 11px;
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+
+        /* ═══ DIRECTORY TABLE ═══ */
+        .dir-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+        .dir-table thead th {
+            text-align: left;
+            padding: 8px 12px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-tertiary);
+            border-bottom: 2px solid var(--border);
+            position: sticky;
+            top: 56px;
+            background: var(--bg);
+            z-index: 5;
+        }
+        .dir-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-light);
+            vertical-align: top;
+        }
+        .dir-table tbody tr:hover { background: var(--surface); }
+        .dir-table .cat-row td {
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            padding: 6px 12px;
+        }
+
+        /* ═══ FOOTER ═══ */
+        .footer {
+            background: var(--accent);
+            color: rgba(255,255,255,0.5);
+            padding: 48px 32px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        .footer strong { color: rgba(255,255,255,0.85); }
+
+        /* ═══ BACK TO TOP ═══ */
+        .btt {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            transform: translateY(8px);
+            transition: var(--transition);
+            z-index: 50;
+        }
+        .btt.show { opacity: 1; transform: translateY(0); }
+        .btt:hover { background: #162D4A; }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 768px) {
+            .hero { padding: 64px 0 48px; }
+            .hero-stats { gap: 24px; }
+            .content { padding: 0 20px; }
+            .section { padding: 48px 0; }
+            .city-top { padding: 24px; }
+            .city-body { padding: 0 24px 24px; }
+            .day-row { grid-template-columns: 44px 1fr; gap: 12px; }
+            .co-grid { grid-template-columns: 1fr; }
+            .grid-3, .grid-2, .grid-4 { grid-template-columns: 1fr; }
+            .clean-table { font-size: 0.78rem; }
+            .clean-table td, .clean-table th { padding: 8px 10px; }
+            .nav a { padding: 14px 10px; font-size: 12px; }
+        }
+
+        /* ═══ PROGRESS BAR ═══ */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--red), var(--gold));
+            z-index: 200;
+            transition: width 0.1s linear;
+            will-change: width;
+        }
+
+        /* ═══ SCROLL ANIMATIONS ═══ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.08s; }
+        .reveal-delay-2 { transition-delay: 0.16s; }
+        .reveal-delay-3 { transition-delay: 0.24s; }
+        .reveal-delay-4 { transition-delay: 0.32s; }
+        .reveal-delay-5 { transition-delay: 0.40s; }
+
+        /* Stagger children */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .stagger-children.visible > *:nth-child(1) { transition-delay: 0.04s; }
+        .stagger-children.visible > *:nth-child(2) { transition-delay: 0.08s; }
+        .stagger-children.visible > *:nth-child(3) { transition-delay: 0.12s; }
+        .stagger-children.visible > *:nth-child(4) { transition-delay: 0.16s; }
+        .stagger-children.visible > *:nth-child(5) { transition-delay: 0.20s; }
+        .stagger-children.visible > *:nth-child(6) { transition-delay: 0.24s; }
+        .stagger-children.visible > *:nth-child(7) { transition-delay: 0.28s; }
+        .stagger-children.visible > *:nth-child(8) { transition-delay: 0.32s; }
+        .stagger-children.visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ═══ HERO ENHANCEMENTS ═══ */
+        .hero-inner > * {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .hero-inner > *:nth-child(1) { animation-delay: 0.1s; }
+        .hero-inner > *:nth-child(2) { animation-delay: 0.25s; }
+        .hero-inner > *:nth-child(3) { animation-delay: 0.4s; }
+        .hero-inner > *:nth-child(4) { animation-delay: 0.55s; }
+        @keyframes heroFadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ═══ CITY CARD HOVER ═══ */
+        .city {
+            transition: box-shadow 0.3s ease;
+        }
+        .city:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+        }
+
+        /* ═══ DAY ROW HOVER ═══ */
+        .day-row {
+            transition: background 0.2s ease, padding-left 0.2s ease;
+            border-radius: var(--radius-sm);
+            margin: 0 -8px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        .day-row:hover {
+            background: var(--bg);
+        }
+
+        /* ═══ CO CARD LIFT ═══ */
+        .co-card {
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.25s ease,
+                        border-color 0.25s ease;
+        }
+        .co-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-color: #D4D4D8;
+        }
+
+        /* ═══ OVERVIEW CARD LIFT ═══ */
+        .ov-card {
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.25s ease;
+        }
+        .ov-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+        }
+
+        /* ═══ ROUTE CARD HOVER ═══ */
+        .route-card {
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.25s ease;
+        }
+        .route-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+
+        /* ═══ MOD TAB TRANSITIONS ═══ */
+        .mod-panel {
+            animation: fadeSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ═══ TOGGLE SMOOTH ═══ */
+        .toggle-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.4s ease;
+            opacity: 0;
+        }
+        .toggle-content.open {
+            max-height: 3000px;
+            opacity: 1;
+        }
+
+        /* ═══ NAV SUBTLE SHADOW ON SCROLL ═══ */
+        .nav-wrap {
+            transition: box-shadow 0.3s ease;
+        }
+        .nav-wrap.scrolled {
+            box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+        }
+
+        /* ═══ TAG HOVER ═══ */
+        .tag {
+            transition: transform 0.15s ease;
+            cursor: default;
+        }
+        .tag:hover {
+            transform: scale(1.05);
+        }
+
+        /* ═══ SECTION DIVIDER ANIMATION ═══ */
+        .week-div::after {
+            transform-origin: left;
+            animation: lineGrow 0.6s ease forwards;
+        }
+        @keyframes lineGrow {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        /* ═══ TOOLTIP ═══ */
+        [data-tooltip] {
+            position: relative;
+            cursor: help;
+        }
+        [data-tooltip]::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            background: var(--text);
+            color: white;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s, transform 0.2s;
+            z-index: 10;
+        }
+        [data-tooltip]:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ═══ PRINT ═══ */
+        @media print {
+            .nav-wrap, .btt, .progress-bar { display: none; }
+            .hero { background: #333; }
+            .toggle-content { max-height: none !important; opacity: 1 !important; }
+            .section { break-inside: avoid; }
+            .reveal, .stagger-children > * { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+    <div class="hero-inner">
+        <div class="hero-badge"><span class="dot"></span> Summer 2026</div>
+        <h1>China Frontiers</h1>
+        <p>A five-week immersive exchange bridging 20 American and 20 Chinese young leaders through the lens of robotics, AI, and the industries reshaping the global economy.</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><div class="num" data-count="5">0</div><div class="label">Weeks</div></div>
+            <div class="hero-stat"><div class="num" data-count="4">0</div><div class="label">Cities</div></div>
+            <div class="hero-stat"><div class="num" data-count="40">0</div><div class="label">Fellows</div></div>
+            <div class="hero-stat"><div class="num" data-count="30" data-suffix="+">0</div><div class="label">Visits</div></div>
+        </div>
+    </div>
+</header>
+
+<!-- ═══════════ NAV ═══════════ -->
+<div class="nav-wrap">
+    <nav class="nav">
+        <a href="#overview">Overview</a>
+        <a href="#beijing">Beijing</a>
+        <a href="#shanghai">Shanghai</a>
+        <a href="#hangzhou">Hangzhou</a>
+        <a href="#shenzhen">Shenzhen</a>
+        <a href="#modules">Electives</a>
+        <a href="#transport">Transport</a>
+        <a href="#budget">Budget</a>
+        <a href="#logistics">Logistics</a>
+        <a href="#directory">Directory</a>
+    </nav>
+</div>
+
+<div class="content">
+
+<!-- ═══════════ OVERVIEW ═══════════ -->
+<section class="section" id="overview">
+    <div class="section-eyebrow">Program Design</div>
+    <div class="section-title">Overview</div>
+    <div class="section-desc reveal">A carefully sequenced journey from policy &amp; research (Beijing) through commercial application (Shanghai &amp; Hangzhou) to hardware &amp; manufacturing (Shenzhen).</div>
+
+    <div class="grid-3 stagger-children">
+        <div class="ov-card">
+            <div class="ov-icon" style="background:var(--red-light);color:var(--red);">◎</div>
+            <h3>Mission</h3>
+            <p>Build lasting relationships between American and Chinese young leaders while providing unparalleled access to the companies, labs, and people driving China's technology frontier.</p>
+        </div>
+        <div class="ov-card">
+            <div class="ov-icon" style="background:var(--blue-light);color:var(--blue);">⊡</div>
+            <h3>Cohort</h3>
+            <p>40 fellows — 20 American, 20 Chinese — from high school seniors through early/mid-career professionals (ages 17–30). Selected for curiosity, leadership, and commitment to cross-cultural exchange.</p>
+        </div>
+        <div class="ov-card">
+            <div class="ov-icon" style="background:var(--green-light);color:var(--green);">◇</div>
+            <h3>Structure</h3>
+            <p><strong>Core track:</strong> Robotics &amp; AI (all fellows). <strong>Elective modules:</strong> Biotech, Manufacturing, Fintech, or Climate Tech — choose add-on days per city.</p>
+        </div>
+        <div class="ov-card">
+            <div class="ov-icon" style="background:var(--purple-light);color:var(--purple);">△</div>
+            <h3>Route</h3>
+            <p>Beijing (10 days) → Shanghai (9 days) → Hangzhou (6 days) → Shenzhen (10 days). Connected by high-speed rail. Sequenced from <em>policy</em> to <em>applications</em> to <em>hardware</em>.</p>
+        </div>
+        <div class="ov-card">
+            <div class="ov-icon" style="background:var(--pink-light);color:var(--pink);">⟡</div>
+            <h3>Exchange Model</h3>
+            <p>Fellows are paired 1:1 (American ↔ Chinese) for the full program. Joint workshops, bilingual panels, team capstone projects, and shared housing.</p>
+        </div>
+        <div class="ov-card">
+            <div class="ov-icon" style="background:var(--gold-light);color:var(--gold);">✦</div>
+            <h3>Capstone</h3>
+            <p>Mixed teams of 4 develop and pitch a cross-border venture concept on the final day in Shenzhen, judged by a panel of founders and investors.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ BEIJING ═══════════ -->
+<section class="section" id="beijing">
+    <div class="section-eyebrow">Weeks 1–2</div>
+    <div class="section-title">Beijing — Policy, Research &amp; the AI Frontier</div>
+    <div class="section-desc">China's political and academic capital. Home to the nation's top AI research labs, leading universities, and the policy apparatus governing technology development.</div>
+
+    <div class="city">
+        <div class="city-top">
+            <div>
+                <div class="city-name">Beijing 北京<span>10 days · Weeks 1–2</span></div>
+            </div>
+            <div class="city-pills">
+                <div class="city-pill"><div class="v">10</div><div class="l">Days</div></div>
+                <div class="city-pill"><div class="v">8</div><div class="l">Visits</div></div>
+                <div class="city-pill"><div class="v">3</div><div class="l">Universities</div></div>
+            </div>
+        </div>
+        <div class="city-body">
+            <div class="callout"><strong>Why Beijing first?</strong> Starting in the capital lets fellows orient through China's policy and academic lens before encountering the commercial intensity of the Yangtze and Pearl River Deltas. This is where AI strategy is set and foundational research happens.</div>
+
+            <div class="week-div">Week 1 — Orientation &amp; AI Foundations</div>
+
+            <div class="day-row">
+                <div class="day-label">Day 1</div>
+                <div class="day-info">
+                    <h4>Arrival &amp; Welcome</h4>
+                    <p>Airport pickup, hotel check-in (Haidian district, near universities). Evening welcome dinner — introductions, buddy pairing ceremony, program overview.</p>
+                    <div class="tags"><span class="tag tag-exch">Exchange</span><span class="tag tag-cult">Cultural</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 2</div>
+                <div class="day-info">
+                    <h4>Tsinghua University — AI Research Deep-Dive</h4>
+                    <p><strong>AM:</strong> Campus tour + Institute for AI Industry Research (AIR) and Future Intelligence Lab. Faculty briefing on China's AI research landscape.<br>
+                    <strong>PM:</strong> Workshop at Cross-Information Institute (Yao Class) — interactive session on AI fundamentals with Tsinghua students. Joint lunch with Schwarzman Scholars.</p>
+                    <div class="tags"><span class="tag tag-uni">University</span><span class="tag tag-work">Workshop</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 3</div>
+                <div class="day-info">
+                    <h4>Zhipu AI (智谱AI) + BAAI (北京智源)</h4>
+                    <p><strong>AM:</strong> Zhipu AI — Tsinghua spinoff behind GLM large language models. Product demo, engineering Q&A, discussion on open-source AI in China.<br>
+                    <strong>PM:</strong> Beijing Academy of AI — government-backed research institute behind FlagAI. Seminar on AI governance and China's approach to AI safety.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span><span class="tag tag-gov">Gov/Research</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 4</div>
+                <div class="day-info">
+                    <h4>Baidu — Autonomous Driving &amp; Foundation Models</h4>
+                    <p><strong>AM:</strong> Baidu HQ in Haidian. Tour Apollo autonomous driving demo center — ride in Apollo Go robotaxis. Briefing on ERNIE foundation model.<br>
+                    <strong>PM:</strong> Hands-on workshop using PaddlePaddle framework. Fellows build a CV model in mixed teams.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span><span class="tag tag-work">Workshop</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 5</div>
+                <div class="day-info">
+                    <h4>Cultural Day — Great Wall &amp; Hutong Exploration</h4>
+                    <p><strong>AM:</strong> Excursion to Mutianyu section of the Great Wall (less crowded, cable car).<br>
+                    <strong>PM:</strong> Guided walk through Nanluoguxiang hutongs. Traditional Peking duck dinner. Reflection: how does China's historical continuity shape its tech ambitions?</p>
+                    <div class="tags"><span class="tag tag-cult">Cultural</span><span class="tag tag-exch">Exchange</span></div>
+                </div>
+            </div>
+
+            <div class="week-div">Week 2 — Robotics, AI Applications &amp; Beijing Wrap-Up</div>
+
+            <div class="day-row">
+                <div class="day-label">Day 6</div>
+                <div class="day-info">
+                    <h4>Xiaomi — Consumer Robotics &amp; Smart Manufacturing</h4>
+                    <p><strong>AM:</strong> Xiaomi HQ tour. CyberDog 2 quadruped and CyberOne humanoid demos. Discussion on consumer-grade robotics and SU7 EV manufacturing.<br>
+                    <strong>PM:</strong> Visit Xiaomi's smart factory in Yizhuang — one of the most automated "lights out" smartphone factories in the world.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 7</div>
+                <div class="day-info">
+                    <h4>Moonshot AI (月之暗面) + Megvii (旷视科技)</h4>
+                    <p><strong>AM:</strong> Moonshot AI — behind Kimi, one of China's most popular AI assistants with long-context breakthroughs. Meet the founding team.<br>
+                    <strong>PM:</strong> Megvii (Face++) — pioneers of CV in China. Tour logistics robotics division (warehouse automation). Discussion on responsible AI and facial recognition governance.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 8</div>
+                <div class="day-info">
+                    <h4>Peking University + Chinese Academy of Sciences</h4>
+                    <p><strong>AM:</strong> PKU Institute for Artificial Intelligence and Wangxuan Institute. Joint seminar with PKU students on US-China tech competition narratives.<br>
+                    <strong>PM:</strong> CAS Institute of Automation — robotics lab tour, humanoid and rehabilitation robotics demonstrations.</p>
+                    <div class="tags"><span class="tag tag-uni">University</span><span class="tag tag-gov">Research</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 9</div>
+                <div class="day-info">
+                    <h4>ByteDance + Panel: "AI in China vs. AI in the US"</h4>
+                    <p><strong>AM:</strong> ByteDance HQ — beyond TikTok: AI research division, recommendation systems, NLP, and Doubao LLM.<br>
+                    <strong>PM:</strong> Panel at Schwarzman College, Tsinghua: "Building AI — Perspectives from Both Sides." Panelists from BAAI, US tech (virtual), and Chinese startups.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span><span class="tag tag-exch">Exchange</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 10</div>
+                <div class="day-info">
+                    <h4>Flex Day + Travel to Shanghai</h4>
+                    <p><strong>AM:</strong> Free morning — Forbidden City, 798 Art District, or Temple of Heaven. Optional elective module.<br>
+                    <strong>PM:</strong> High-speed rail Beijing South → Shanghai Hongqiao (4h 28min). Arrive Shanghai evening.</p>
+                    <div class="tags"><span class="tag tag-flex">Free/Flex</span><span class="tag tag-trav">Travel</span></div>
+                </div>
+            </div>
+
+            <button class="toggle-btn" onclick="toggleSection('bj-companies')">
+                <span class="arrow">▼</span> View Beijing Company Directory (8 companies)
+            </button>
+            <div id="bj-companies" class="toggle-content">
+                <div class="co-grid">
+                    <div class="co-card">
+                        <div class="co-card-head">
+                            <div><h4>Zhipu AI</h4><div class="co-zh">智谱AI · Founded 2019</div></div>
+                            <span class="co-sector">LLMs</span>
+                        </div>
+                        <p>Tsinghua spinoff behind the GLM series. Raised $400M+. Created ChatGLM, one of China's first competitive open-source LLMs.</p>
+                        <div class="co-why">→ Direct Tsinghua connection; shows academic-to-industry pipeline in China's AI ecosystem.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head">
+                            <div><h4>Baidu</h4><div class="co-zh">百度 · Founded 2000</div></div>
+                            <span class="co-sector">AD · LLMs</span>
+                        </div>
+                        <p>China's search giant, now AI-first. Apollo Go: world's largest autonomous ride-hailing fleet (500K+ rides/quarter in Wuhan). ERNIE powers Baidu's product suite.</p>
+                        <div class="co-why">→ Robotaxis fellows can actually ride in; at-scale L4 autonomy beyond Waymo.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head">
+                            <div><h4>Moonshot AI</h4><div class="co-zh">月之暗面 · Founded 2023</div></div>
+                            <span class="co-sector">Consumer AI</span>
+                        </div>
+                        <p>Founded by ex-Tsinghua/Google Brain researchers. Kimi broke through with 2M-token context. Valued at $3B+ within 18 months.</p>
+                        <div class="co-why">→ Fastest-growing AI startup in Chinese history; window into LLM competition dynamics.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head">
+                            <div><h4>Megvii</h4><div class="co-zh">旷视科技 (Face++) · Founded 2011</div></div>
+                            <span class="co-sector">CV · Logistics</span>
+                        </div>
+                        <p>Originally Face++, now pivoted to logistics robotics and smart warehouse solutions competing with Amazon Robotics.</p>
+                        <div class="co-why">→ Evolution from facial recognition to industrial robotics; sparks ethics conversations.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head">
+                            <div><h4>Xiaomi</h4><div class="co-zh">小米 · Founded 2010</div></div>
+                            <span class="co-sector">Robotics · EVs</span>
+                        </div>
+                        <p>Consumer electronics giant building humanoid robots (CyberOne), quadrupeds (CyberDog), EVs (SU7), and running fully automated dark factories. Revenue $50B+.</p>
+                        <div class="co-why">→ End-to-end story from consumer brand to robotics to EVs; factory tour is among China's most impressive.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head">
+                            <div><h4>ByteDance</h4><div class="co-zh">字节跳动 · Founded 2012</div></div>
+                            <span class="co-sector">Rec AI · LLMs</span>
+                        </div>
+                        <p>Parent of TikTok/Douyin. AI research lab: NLP, CV, Doubao LLM. Most valuable private company globally ($225B+).</p>
+                        <div class="co-why">→ World's most successful recommendation algorithm; AI at extreme scale; culturally resonant with younger fellows.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head">
+                            <div><h4>BAAI</h4><div class="co-zh">北京智源人工智能研究院 · 2018</div></div>
+                            <span class="co-sector">Gov AI R&D</span>
+                        </div>
+                        <p>Government-backed national AI research institute. FlagAI, Aquila LLM, and foundational AI research. Analogous to a national AI lab.</p>
+                        <div class="co-why">→ Window into government-directed AI R&D strategy; complements private-sector visits.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head">
+                            <div><h4>CAS Institute of Automation</h4><div class="co-zh">中科院自动化所 · 1956</div></div>
+                            <span class="co-sector">Robotics</span>
+                        </div>
+                        <p>China's premier government robotics lab. Humanoid robotics, rehabilitation robots, brain-computer interfaces, pattern recognition.</p>
+                        <div class="co-why">→ Deep research robotics (vs. commercial); the government pipeline feeding China's robotics boom.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ SHANGHAI ═══════════ -->
+<section class="section" id="shanghai">
+    <div class="section-eyebrow">Week 3</div>
+    <div class="section-title">Shanghai — AI Applications &amp; Commercial Innovation</div>
+    <div class="section-desc">China's commercial capital. Where AI meets industry at scale — in hospitals, ports, financial services, and autonomous vehicles.</div>
+
+    <div class="city">
+        <div class="city-top">
+            <div><div class="city-name">Shanghai 上海<span>9 days · Weeks 3–4</span></div></div>
+            <div class="city-pills">
+                <div class="city-pill"><div class="v">9</div><div class="l">Days</div></div>
+                <div class="city-pill"><div class="v">7</div><div class="l">Visits</div></div>
+                <div class="city-pill"><div class="v">1</div><div class="l">University</div></div>
+            </div>
+        </div>
+        <div class="city-body">
+            <div class="callout"><strong>Why Shanghai second?</strong> After understanding the "why" (policy, research) in Beijing, Shanghai shows the "how" — AI deployed in the world's busiest port, cutting-edge hospitals, and autonomous vehicle testing zones.</div>
+
+            <div class="week-div">Week 3 — AI in Industry &amp; Commerce</div>
+
+            <div class="day-row">
+                <div class="day-label">Day 11</div>
+                <div class="day-info">
+                    <h4>Shanghai AI Lab + Zhangjiang AI Island</h4>
+                    <p><strong>AM:</strong> Zhangjiang Science City "AI Island" — China's densest AI cluster. Shanghai AI Lab: InternLM models, OpenGVLab.<br><strong>PM:</strong> Walking tour of Zhangjiang's robotics corridor. Meet 2–3 early-stage AI startups in the incubator.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span><span class="tag tag-gov">Research</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 12</div>
+                <div class="day-info">
+                    <h4>United Imaging Healthcare (联影医疗) + MiniMax (稀宇科技)</h4>
+                    <p><strong>AM:</strong> United Imaging — China's leading medical imaging + AI diagnostics company. Demo of AI-assisted CT/MRI, uAI platform. Healthcare AI regulation discussion.<br><strong>PM:</strong> MiniMax — one of the "AI Six Little Tigers." Hailuo video generation and Talkie character AI (30M+ users).</p>
+                    <div class="tags"><span class="tag tag-co">Company</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 13</div>
+                <div class="day-info">
+                    <h4>NIO (蔚来) — Smart EVs &amp; Autonomous Driving</h4>
+                    <p><strong>AM:</strong> NIO HQ in Anting. Test rides with NOP+ autonomous driving. Tour NIO House.<br><strong>PM:</strong> Workshop on AD tech stacks (China vs. US). Experience a 3-minute battery swap at NIO's swap station.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span><span class="tag tag-work">Workshop</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 14</div>
+                <div class="day-info">
+                    <h4>Cultural Day — Shanghai Heritage &amp; Modern Life</h4>
+                    <p><strong>AM:</strong> The Bund, Yu Garden, Shanghai Museum.<br><strong>PM:</strong> Free time in Former French Concession. Evening Huangpu River cruise dinner.</p>
+                    <div class="tags"><span class="tag tag-cult">Cultural</span><span class="tag tag-flex">Free</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 15</div>
+                <div class="day-info">
+                    <h4>JAKA Robotics (节卡) + STEP Robotics (思腾合力)</h4>
+                    <p><strong>AM:</strong> JAKA — China's leading cobot company. Demo of cobots in manufacturing, food service, and lab automation.<br><strong>PM:</strong> STEP Robotics — humanoid robot development center. Discussion on humanoid robotics in industrial applications.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 16</div>
+                <div class="day-info">
+                    <h4>Fudan University + Yangshan Port</h4>
+                    <p><strong>AM:</strong> Fudan — School of CS and Shanghai Qi Zhi Institute (Turing Award co-founded). Joint seminar.<br><strong>PM:</strong> Yangshan Deep Water Port — world's largest fully automated container terminal. Zero human operators. AI-driven logistics at extreme scale.</p>
+                    <div class="tags"><span class="tag tag-uni">University</span><span class="tag tag-co">Industry</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 17</div>
+                <div class="day-info">
+                    <h4>StepFun (阶跃星辰) + VC Fireside Chat</h4>
+                    <p><strong>AM:</strong> StepFun — "Six Little Tigers" member, multimodal large models (Step series).<br><strong>PM:</strong> Fireside chat with Shanghai VCs (HongShan, 5Y Capital, Linear Capital). "What's fundable in China AI right now?"</p>
+                    <div class="tags"><span class="tag tag-co">Company</span><span class="tag tag-exch">Exchange</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 18</div>
+                <div class="day-info">
+                    <h4>Elective Module Day + Flex</h4>
+                    <p><strong>Option A:</strong> Biotech — WuXi AppTec or BioMap in Zhangjiang.<br><strong>Option B:</strong> Manufacturing — SAIC Motor or Bosch smart factory.<br><strong>Option C:</strong> Free day — Zhujiajiao water town or Jing'an Temple neighborhood.</p>
+                    <div class="tags"><span class="tag tag-flex">Elective/Flex</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 19</div>
+                <div class="day-info">
+                    <h4>Travel to Hangzhou</h4>
+                    <p><strong>AM:</strong> Free morning. <strong>PM:</strong> HSR Shanghai Hongqiao → Hangzhou East (59 min). Check into hotel (Binjiang). Evening West Lake walk.</p>
+                    <div class="tags"><span class="tag tag-trav">Travel</span></div>
+                </div>
+            </div>
+
+            <button class="toggle-btn" onclick="toggleSection('sh-companies')">
+                <span class="arrow">▼</span> View Shanghai Company Directory (7 companies)
+            </button>
+            <div id="sh-companies" class="toggle-content">
+                <div class="co-grid">
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>Shanghai AI Lab</h4><div class="co-zh">上海人工智能实验室 · 2021</div></div><span class="co-sector">Open Research</span></div>
+                        <p>Government-supported lab producing InternLM, InternVL, and OpenCompass. Nexus of open AI research in China.</p>
+                        <div class="co-why">→ How China's government labs operate differently from US academic/corporate models.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>United Imaging</h4><div class="co-zh">联影医疗 · 2011</div></div><span class="co-sector">Healthcare AI</span></div>
+                        <p>Broke Siemens/GE/Philips oligopoly in CT/MRI. $10B+ company with AI diagnostics in 10,000+ hospitals. World's most advanced total-body PET/CT.</p>
+                        <div class="co-why">→ AI in healthcare is universally compelling; China competing in high-precision medical devices.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>MiniMax</h4><div class="co-zh">稀宇科技 · 2021</div></div><span class="co-sector">Multimodal AI</span></div>
+                        <p>Created Hailuo (video gen, Sora competitor) and Talkie (character AI). Ex-SenseTime CTO founder. Valued $2.5B+.</p>
+                        <div class="co-why">→ Consumer AI product development in China's unique social media ecosystem.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>NIO</h4><div class="co-zh">蔚来汽车 · 2014</div></div><span class="co-sector">Smart EVs</span></div>
+                        <p>Premium EV brand. Battery-swap network (2,600+ stations). In-house AD chip (NX9031). Revenue $8B+.</p>
+                        <div class="co-why">→ Ride in autonomous vehicles + witness battery swap; great Tesla/Rivian comparison for American fellows.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>JAKA Robotics</h4><div class="co-zh">节卡机器人 · 2014</div></div><span class="co-sector">Cobots</span></div>
+                        <p>China's leading cobot manufacturer, competing with Universal Robots (Denmark). Deployed across automotive, electronics, and pharma.</p>
+                        <div class="co-why">→ Hands-on cobot interaction; accessible entry point to industrial robotics.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>StepFun</h4><div class="co-zh">阶跃星辰 · 2023</div></div><span class="co-sector">Foundation Models</span></div>
+                        <p>Founded by ex-MSRA leader. Step series multimodal models. Raised $100M+ in year one.</p>
+                        <div class="co-why">→ MSRA-to-startup pipeline; how Chinese AI labs differentiate technically.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>Yangshan Port</h4><div class="co-zh">洋山深水港 · Phase IV 2017</div></div><span class="co-sector">Autonomous Logistics</span></div>
+                        <p>World's largest automated container terminal. Zero human operators on yard. AI-driven AGVs handle 6.3M+ TEU annually.</p>
+                        <div class="co-why">→ Robotics at massive real-world scale; unlike anything in the US. Visceral and memorable.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ HANGZHOU ═══════════ -->
+<section class="section" id="hangzhou">
+    <div class="section-eyebrow">Week 4</div>
+    <div class="section-title">Hangzhou — AI Commerce &amp; Robotics Capital</div>
+    <div class="section-desc">Alibaba's hometown and a hotbed of robotics startups. Home to DeepSeek, Unitree Robotics, and some of the most innovative tech companies in China.</div>
+
+    <div class="city">
+        <div class="city-top">
+            <div><div class="city-name">Hangzhou 杭州<span>6 days · Week 4</span></div></div>
+            <div class="city-pills">
+                <div class="city-pill"><div class="v">6</div><div class="l">Days</div></div>
+                <div class="city-pill"><div class="v">5</div><div class="l">Visits</div></div>
+                <div class="city-pill"><div class="v">1</div><div class="l">University</div></div>
+            </div>
+        </div>
+        <div class="city-body">
+            <div class="callout"><strong>Why Hangzhou?</strong> Home to DeepSeek (the AI model that shook the world in 2025), Unitree (viral quadruped and humanoid robots), Alibaba/DAMO Academy, and Hikvision. Plus — West Lake is stunning.</div>
+
+            <div class="week-div">Week 4 — Commerce AI &amp; Robotics Hardware</div>
+
+            <div class="day-row">
+                <div class="day-label">Day 20</div>
+                <div class="day-info">
+                    <h4>DeepSeek (深度求索)</h4>
+                    <p><strong>AM:</strong> DeepSeek — behind V3 and R1 models that demonstrated frontier capabilities at a fraction of US training costs. Meet the research team.<br><strong>PM:</strong> Workshop: "Training Efficiency — How DeepSeek Did More with Less." Technical deep-dive + accessible overview.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span><span class="tag tag-work">Workshop</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 21</div>
+                <div class="day-info">
+                    <h4>Unitree Robotics (宇树科技)</h4>
+                    <p><strong>AM:</strong> Unitree HQ — Go2 quadruped and H1/G1 humanoid robots. Full demo, hands-on time. Meet founder Wang Xingxing.<br><strong>PM:</strong> Manufacturing line tour. Discussion on 10x lower pricing than Boston Dynamics. Workshop: basic robot control programming.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span><span class="tag tag-work">Workshop</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 22</div>
+                <div class="day-info">
+                    <h4>Alibaba DAMO Academy (达摩院) + Ant Group (蚂蚁集团)</h4>
+                    <p><strong>AM:</strong> Alibaba Xixi campus. DAMO Academy — Qwen LLMs, AI for science, Cainiao logistics robots.<br><strong>PM:</strong> Ant Group — fintech behind Alipay (900M+ users). AI risk management systems, financial inclusion story.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 23</div>
+                <div class="day-info">
+                    <h4>Cultural Day — West Lake &amp; Hangzhou Heritage</h4>
+                    <p><strong>AM:</strong> West Lake boat ride, Lingyin Temple, tea tasting at Longjing Village.<br><strong>PM:</strong> Free time, buddy pair activities. Evening group hotpot + mid-program reflection circle.</p>
+                    <div class="tags"><span class="tag tag-cult">Cultural</span><span class="tag tag-exch">Exchange</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 24</div>
+                <div class="day-info">
+                    <h4>Hikvision (海康威视) + Zhejiang University</h4>
+                    <p><strong>AM:</strong> Hikvision — world's #1 video surveillance company (40%+ global share), now pivoting to AIoT and autonomous mobile robots.<br><strong>PM:</strong> Zhejiang University — College of Control Science and Engineering. Mixed-team robotics mini hackathon with ZJU students.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span><span class="tag tag-uni">University</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 25</div>
+                <div class="day-info">
+                    <h4>Flex Day + Travel to Shenzhen</h4>
+                    <p><strong>AM:</strong> Elective or free time. Optional: NetEase campus, Liangzhu Ancient City (UNESCO).<br><strong>PM:</strong> HSR Hangzhou → Shenzhen (7h) or fly (2.5h). Check in to hotel (Nanshan).</p>
+                    <div class="tags"><span class="tag tag-flex">Free/Flex</span><span class="tag tag-trav">Travel</span></div>
+                </div>
+            </div>
+
+            <button class="toggle-btn" onclick="toggleSection('hz-companies')">
+                <span class="arrow">▼</span> View Hangzhou Company Directory (5 companies)
+            </button>
+            <div id="hz-companies" class="toggle-content">
+                <div class="co-grid">
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>DeepSeek</h4><div class="co-zh">深度求索 · 2023</div></div><span class="co-sector">Foundation Models</span></div>
+                        <p>Founded by Liang Wenfeng (High-Flyer). R1 and V3 demonstrated frontier performance at dramatically lower cost. Open-sourced. The most talked-about AI lab in 2025.</p>
+                        <div class="co-why">→ THE defining AI story of 2025. No visit to China's AI sector is complete without DeepSeek.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>Unitree Robotics</h4><div class="co-zh">宇树科技 · 2016</div></div><span class="co-sector">Robotics</span></div>
+                        <p>Go2 quadruped ($1,600 vs. Boston Dynamics Spot at $75K). H1/G1 humanoids went viral. Democratizing robotics through aggressive pricing.</p>
+                        <div class="co-why">→ Most hands-on, "wow factor" visit of the entire itinerary. Price disruption story is unforgettable.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>Alibaba DAMO Academy</h4><div class="co-zh">达摩院 · 2017</div></div><span class="co-sector">AI Research</span></div>
+                        <p>Qwen LLM (widely used globally), Tongyi Qianwen AI, Cainiao logistics robots. $15B+ invested in R&D.</p>
+                        <div class="co-why">→ AI research that translates into products for 1B+ daily users; Qwen is one of the most-downloaded open LLMs.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>Hikvision</h4><div class="co-zh">海康威视 · 2001</div></div><span class="co-sector">AIoT · Robotics</span></div>
+                        <p>Expanding into industrial AI, autonomous mobile robots (Hikrobot), and smart city infrastructure. Revenue $13B+. On US entity list.</p>
+                        <div class="co-why">→ Unavoidable in honest discussion of Chinese tech. Robotics pivot under sanctions prompts rich ethical discussion.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>Ant Group</h4><div class="co-zh">蚂蚁集团 · 2014</div></div><span class="co-sector">Fintech · AI</span></div>
+                        <p>Behind Alipay (900M+ users). AI micro-lending (3-min approval), fraud detection, ESG scoring. World's most advanced fintech platform.</p>
+                        <div class="co-why">→ AI at extreme societal scale; financial inclusion story is powerful for all backgrounds.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ SHENZHEN ═══════════ -->
+<section class="section" id="shenzhen">
+    <div class="section-eyebrow">Week 5</div>
+    <div class="section-title">Shenzhen — Hardware, Manufacturing &amp; Capstone</div>
+    <div class="section-desc">The world's hardware capital. Where ideas become physical products — from DJI drones to BYD vehicles to Huawei's AI chips. The program culminates here.</div>
+
+    <div class="city">
+        <div class="city-top">
+            <div><div class="city-name">Shenzhen 深圳<span>10 days · Week 5 + wrap-up</span></div></div>
+            <div class="city-pills">
+                <div class="city-pill"><div class="v">10</div><div class="l">Days</div></div>
+                <div class="city-pill"><div class="v">8</div><div class="l">Visits</div></div>
+                <div class="city-pill"><div class="v">1</div><div class="l">Capstone</div></div>
+            </div>
+        </div>
+        <div class="city-body">
+            <div class="callout"><strong>Why Shenzhen last?</strong> After absorbing AI research (Beijing), applications (Shanghai), and commerce (Hangzhou), Shenzhen completes the picture: where hardware gets built. The capstone asks fellows to synthesize everything into a cross-border venture pitch.</div>
+
+            <div class="week-div">Week 5 — Hardware Capital &amp; Capstone</div>
+
+            <div class="day-row">
+                <div class="day-label">Day 26</div>
+                <div class="day-info">
+                    <h4>DJI (大疆) — Drones, Robotics &amp; Computer Vision</h4>
+                    <p><strong>AM:</strong> DJI Sky City HQ. Drone flight demo, hands-on time. 70%+ global drone market share.<br><strong>PM:</strong> RoboMaster workshop — mixed-team competition using S1 robots. Discussion on dual-use technology.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span><span class="tag tag-work">Workshop</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 27</div>
+                <div class="day-info">
+                    <h4>BYD (比亚迪) — EV Manufacturing at Scale</h4>
+                    <p><strong>AM:</strong> BYD HQ and exhibition center (Pingshan). Full vertical integration: raw lithium to finished cars. 4.3M vehicles in 2024.<br><strong>PM:</strong> Factory tour — Blade Battery line, automated assembly, AI quality control.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 28</div>
+                <div class="day-info">
+                    <h4>Huawei (华为) — AI Chips, Cloud &amp; HarmonyOS</h4>
+                    <p><strong>AM:</strong> Huawei HQ in Bantian. Exhibition hall, Ascend AI chips, Pangu model briefing.<br><strong>PM:</strong> Visit Ox Horn campus in Dongguan (45-min). R&D tour. Discussion on tech self-reliance and semiconductor supply chains.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 29</div>
+                <div class="day-info">
+                    <h4>UBTECH (优必选) + Huaqiangbei Electronics Market</h4>
+                    <p><strong>AM:</strong> UBTECH — China's first humanoid-robotics IPO. Walker S humanoid demo, logistics robots deployed in real factories.<br><strong>PM:</strong> Guided Huaqiangbei exploration. Component sourcing challenge: ¥200/team to build a gadget. Experience the Shenzhen "maker" ecosystem.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span><span class="tag tag-work">Workshop</span><span class="tag tag-cult">Cultural</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 30</div>
+                <div class="day-info">
+                    <h4>Tencent (腾讯) — AI Research &amp; Robotics Lab</h4>
+                    <p><strong>AM:</strong> Tencent Binhai Tower. AI Lab and Robotics X Lab — agile locomotion, dexterous manipulation, Hunyuan LLM.<br><strong>PM:</strong> Workshop: "Building AI Products for 1 Billion Users." WeChat product philosophy discussion.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span><span class="tag tag-work">Workshop</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 31</div>
+                <div class="day-info">
+                    <h4>Cultural Day — Shenzhen &amp; Optional Hong Kong</h4>
+                    <p><strong>Option A:</strong> Hong Kong day trip via Futian checkpoint (15-min metro). Science Park or Victoria Peak.<br><strong>Option B:</strong> OCT Loft creative district, Shenzhen MOCA, Wutong Mountain hike. Evening seafood dinner in Shekou.</p>
+                    <div class="tags"><span class="tag tag-cult">Cultural</span><span class="tag tag-flex">Free</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 32</div>
+                <div class="day-info">
+                    <h4>XPeng (小鹏) — Autonomous Driving &amp; Flying Cars</h4>
+                    <p><strong>AM:</strong> XPeng HQ in Guangzhou (1h train). XNGP autonomous driving demo. Tour AeroHT — flying car (eVTOL) prototype and modular manufacturing.<br><strong>PM:</strong> Return to Shenzhen. Capstone team formation and brainstorming. Teams receive challenge brief.</p>
+                    <div class="tags"><span class="tag tag-co">Company</span><span class="tag tag-work">Workshop</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 33</div>
+                <div class="day-info">
+                    <h4>SIAT (中科院深圳先进院) + Elective</h4>
+                    <p><strong>AM:</strong> CAS Shenzhen — brain-computer interface lab, biomedical robotics, synthetic biology.<br><strong>PM:</strong> Elective: BGI Genomics (biotech), Foxconn smart manufacturing, or capstone working session.</p>
+                    <div class="tags"><span class="tag tag-gov">Research</span><span class="tag tag-flex">Elective</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 34</div>
+                <div class="day-info">
+                    <h4>Capstone Working Day</h4>
+                    <p>Full day for capstone prep. Teams of 4 (2 American + 2 Chinese) develop cross-border venture concepts. Access to mentors from visited companies. Evening pitch rehearsals.</p>
+                    <div class="tags"><span class="tag tag-work">Workshop</span><span class="tag tag-exch">Exchange</span></div>
+                </div>
+            </div>
+            <div class="day-row">
+                <div class="day-label">Day 35</div>
+                <div class="day-info">
+                    <h4>Capstone Pitch Day + Farewell</h4>
+                    <p><strong>AM:</strong> Pitches to panel of judges (VCs, founders, professors). Prizes and feedback.<br><strong>PM:</strong> Closing ceremony, certificates, group photo. Farewell dinner with fellows, staff, and guests from visited companies. Alumni network launch.</p>
+                    <div class="tags"><span class="tag tag-exch">Exchange</span><span class="tag tag-cult">Cultural</span></div>
+                </div>
+            </div>
+
+            <button class="toggle-btn" onclick="toggleSection('sz-companies')">
+                <span class="arrow">▼</span> View Shenzhen Company Directory (8 companies)
+            </button>
+            <div id="sz-companies" class="toggle-content">
+                <div class="co-grid">
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>DJI</h4><div class="co-zh">大疆创新 · 2006</div></div><span class="co-sector">Drones</span></div>
+                        <p>70%+ global consumer/commercial drone market. Sky City HQ is an architectural icon. Expanded into education robotics (RoboMaster), handheld imaging, and LiDAR.</p>
+                        <div class="co-why">→ Globally dominant hardware company born in Shenzhen. Drone demos are tangible and exciting.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>BYD</h4><div class="co-zh">比亚迪 · 1995</div></div><span class="co-sector">EVs · Batteries</span></div>
+                        <p>World's largest EV manufacturer (4.3M in 2024). Vertically integrated: lithium mining to finished cars. Blade Battery. Revenue $95B+.</p>
+                        <div class="co-why">→ Most important manufacturing story in the world. Scale that must be seen to be believed.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>Huawei</h4><div class="co-zh">华为 · 1987</div></div><span class="co-sector">AI Chips · OS</span></div>
+                        <p>Ascend AI chips (competing with NVIDIA despite sanctions), HarmonyOS, Pangu models. Revenue $100B+. Ox Horn campus is legendary.</p>
+                        <div class="co-why">→ Central to US-China tech narrative. Sanctions-to-self-reliance story is essential context.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>UBTECH Robotics</h4><div class="co-zh">优必选 · 2012</div></div><span class="co-sector">Humanoid</span></div>
+                        <p>First humanoid-robot IPO (HKEX 2023). Walker S deployed in NIO/BYD factories. Performed at 2024 Spring Festival Gala (800M viewers).</p>
+                        <div class="co-why">→ Most advanced humanoid fellows can interact with. Real commercialization, not just demos.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>Tencent</h4><div class="co-zh">腾讯 · 1998</div></div><span class="co-sector">AI · Social</span></div>
+                        <p>WeChat (1.3B users), world's largest gaming co., Robotics X Lab (agile locomotion, dexterous hands), Hunyuan LLM. Market cap $500B+.</p>
+                        <div class="co-why">→ AI at consumer scale; Robotics X is cutting-edge; WeChat is essential to understanding digital China.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>XPeng</h4><div class="co-zh">小鹏汽车 · 2014</div></div><span class="co-sector">AD · eVTOL</span></div>
+                        <p>Most advanced city-level AD in China (XNGP, 200+ cities, no HD maps). AeroHT division developing flying cars. HQ in Guangzhou (1h from Shenzhen).</p>
+                        <div class="co-why">→ Flying car prototypes! Most advanced city-level autonomous driving in China.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>SIAT</h4><div class="co-zh">中科院深圳先进院 · 2006</div></div><span class="co-sector">BCI · Biomedical</span></div>
+                        <p>CAS Shenzhen branch. Brain-computer interfaces, surgical robotics, synthetic biology. 3,000+ researchers. Many Shenzhen biotech startups originate here.</p>
+                        <div class="co-why">→ Bridges AI/robotics with biotech; BCI demos are mind-blowing; frontier government R&D.</div>
+                    </div>
+                    <div class="co-card">
+                        <div class="co-card-head"><div><h4>Makeblock</h4><div class="co-zh">创客工场 · 2013</div></div><span class="co-sector">STEM Education</span></div>
+                        <p>World's leading STEM education robotics company. mBot and CyberPi in 25M+ classrooms in 140+ countries.</p>
+                        <div class="co-why">→ Optional visit for education-focused fellows. Hands-on and accessible for all levels.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ ELECTIVE MODULES ═══════════ -->
+<section class="section" id="modules">
+    <div class="section-eyebrow">Customization</div>
+    <div class="section-title">Elective Modules</div>
+    <div class="section-desc">Each city has 1–2 flex days. Fellows choose add-on modules to explore other globally competitive Chinese industries. Each module replaces one flex day.</div>
+
+    <div class="mod-tabs">
+        <div class="mod-tab active" onclick="showMod('bio',this)">Biotech &amp; Genomics</div>
+        <div class="mod-tab" onclick="showMod('mfg',this)">Advanced Manufacturing</div>
+        <div class="mod-tab" onclick="showMod('fin',this)">Fintech &amp; Digital Economy</div>
+        <div class="mod-tab" onclick="showMod('grn',this)">Green Energy &amp; Climate</div>
+    </div>
+
+    <div id="mod-bio" class="mod-panel active">
+        <div class="co-grid">
+            <div class="co-card">
+                <div class="co-card-head"><div><h4>WuXi AppTec</h4><div class="co-zh">药明康德 · Shanghai</div></div><span class="co-sector">CRO/CDMO</span></div>
+                <p>World's largest pharma contract research/manufacturing org. 6,000+ global clients. Revenue $5B+. Central to BIOSECURE Act debates.</p>
+                <div class="co-why">→ Available: Shanghai Day 18</div>
+            </div>
+            <div class="co-card">
+                <div class="co-card-head"><div><h4>BGI Genomics</h4><div class="co-zh">华大基因 · Shenzhen</div></div><span class="co-sector">Genomics</span></div>
+                <p>World's largest genomics org. Built China's own gene sequencers (breaking Illumina's monopoly). Sequenced COVID-19 virus.</p>
+                <div class="co-why">→ Available: Shenzhen Day 33</div>
+            </div>
+            <div class="co-card">
+                <div class="co-card-head"><div><h4>BioMap</h4><div class="co-zh">百图生科 · Beijing/Shanghai</div></div><span class="co-sector">AI + Biology</span></div>
+                <p>Large-scale AI for protein structure prediction and drug target discovery. One of China's most prominent AI-for-science companies.</p>
+                <div class="co-why">→ Available: Shanghai Day 18 or Beijing Day 10</div>
+            </div>
+            <div class="co-card">
+                <div class="co-card-head"><div><h4>Insilico Medicine</h4><div class="co-zh">英矽智能 · Shanghai/HK</div></div><span class="co-sector">AI Drug Discovery</span></div>
+                <p>First company to take an AI-discovered drug to Phase II trials. Generative AI for target ID, molecule generation, trial prediction.</p>
+                <div class="co-why">→ Available: Shanghai Day 18</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-mfg" class="mod-panel">
+        <div class="co-grid">
+            <div class="co-card">
+                <div class="co-card-head"><div><h4>CATL</h4><div class="co-zh">宁德时代 · Shanghai area</div></div><span class="co-sector">Batteries</span></div>
+                <p>World's largest EV battery manufacturer (37% global share). Supplies Tesla, BMW, Mercedes, VW. Sodium-ion and condensed-state batteries. Revenue $50B+.</p>
+                <div class="co-why">→ Available: Shanghai Day 18 (R&D center or Ningde side trip)</div>
+            </div>
+            <div class="co-card">
+                <div class="co-card-head"><div><h4>SAIC Motor</h4><div class="co-zh">上汽集团 · Shanghai</div></div><span class="co-sector">Auto Manufacturing</span></div>
+                <p>China's largest auto manufacturer (5M+ vehicles/year). JVs with VW and GM. Smart factory in Lingang with AI quality inspection.</p>
+                <div class="co-why">→ Available: Shanghai Day 18</div>
+            </div>
+            <div class="co-card">
+                <div class="co-card-head"><div><h4>Foxconn</h4><div class="co-zh">富士康 · Shenzhen</div></div><span class="co-sector">Electronics Mfg</span></div>
+                <p>World's largest electronics manufacturer (iPhones, PS5). Longhua campus: 200K+ people. Increasingly automated "lights out" production lines.</p>
+                <div class="co-why">→ Available: Shenzhen Day 33</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-fin" class="mod-panel">
+        <div class="co-grid">
+            <div class="co-card">
+                <div class="co-card-head"><div><h4>Ant Group (Deep Dive)</h4><div class="co-zh">蚂蚁集团 · Hangzhou</div></div><span class="co-sector">Fintech</span></div>
+                <p>Extended visit. Deep dive into Zhima Credit scoring, micro-lending algorithms, blockchain trade finance. Fintech regulation discussion.</p>
+                <div class="co-why">→ Available: Hangzhou Day 25</div>
+            </div>
+            <div class="co-card">
+                <div class="co-card-head"><div><h4>Pinduoduo / Temu</h4><div class="co-zh">拼多多 · Shanghai</div></div><span class="co-sector">E-Commerce</span></div>
+                <p>Most valuable Chinese e-commerce company ($150B+ cap). Temu expanding globally. AI group buying, gamified shopping. Revenue $40B+.</p>
+                <div class="co-why">→ Available: Shanghai Day 18</div>
+            </div>
+            <div class="co-card">
+                <div class="co-card-head"><div><h4>WeBank</h4><div class="co-zh">微众银行 · Shenzhen</div></div><span class="co-sector">Digital Banking</span></div>
+                <p>China's first digital-only bank (Tencent-backed). Pioneered federated learning for privacy-preserving AI. 400M+ customers, zero branches.</p>
+                <div class="co-why">→ Available: Shenzhen Day 33</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-grn" class="mod-panel">
+        <div class="co-grid">
+            <div class="co-card">
+                <div class="co-card-head"><div><h4>LONGi Green Energy</h4><div class="co-zh">隆基绿能 · Xi'an (virtual)</div></div><span class="co-sector">Solar</span></div>
+                <p>World's largest solar wafer/module manufacturer. Revenue $15B+. Drove solar costs down 90% over a decade.</p>
+                <div class="co-why">→ Available: Virtual session any flex day</div>
+            </div>
+            <div class="co-card">
+                <div class="co-card-head"><div><h4>Envision Energy</h4><div class="co-zh">远景能源 · Shanghai</div></div><span class="co-sector">Wind · Grid AI</span></div>
+                <p>Top wind turbine manufacturer. EnOS manages 620GW+ energy assets globally. Also produces EV batteries (supplies Nissan). Revenue $8B+.</p>
+                <div class="co-why">→ Available: Shanghai Day 18</div>
+            </div>
+            <div class="co-card">
+                <div class="co-card-head"><div><h4>CATL (Climate Focus)</h4><div class="co-zh">宁德时代 · Shanghai area</div></div><span class="co-sector">Grid Storage</span></div>
+                <p>Grid-scale energy storage enabling renewables worldwide. Sodium-ion batteries could eliminate lithium dependency.</p>
+                <div class="co-why">→ Available: Shanghai Day 18</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ TRANSPORT ═══════════ -->
+<section class="section" id="transport">
+    <div class="section-eyebrow">Logistics</div>
+    <div class="section-title">Inter-City Transport</div>
+    <div class="section-desc">All inter-city travel via China's high-speed rail network. Prices are second-class; group discounts of 10–15% may apply for 40 passengers.</div>
+
+    <div class="grid-4">
+        <div class="route-card">
+            <div class="route-name">Beijing <span class="arr">→</span> Shanghai</div>
+            <div class="route-detail">G-Train (Fuxing) · 4h 28min · 1,300 km<br>Every 10–15 min</div>
+            <div class="route-price">¥553 <small>/ $76 pp</small></div>
+        </div>
+        <div class="route-card">
+            <div class="route-name">Shanghai <span class="arr">→</span> Hangzhou</div>
+            <div class="route-detail">G-Train · 59 min · 175 km<br>Every 5–10 min</div>
+            <div class="route-price">¥73 <small>/ $10 pp</small></div>
+        </div>
+        <div class="route-card">
+            <div class="route-name">Hangzhou <span class="arr">→</span> Shenzhen</div>
+            <div class="route-detail">G-Train · ~7h · 1,400 km<br>Or fly: 2.5h, ¥800–1,200</div>
+            <div class="route-price">¥707 <small>/ $97 pp</small></div>
+        </div>
+        <div class="route-card">
+            <div class="route-name">Shenzhen <span class="arr">↔</span> Guangzhou</div>
+            <div class="route-detail">G-Train · 30 min · 105 km<br>For XPeng visit (Day 32)</div>
+            <div class="route-price">¥75 <small>/ $10 pp</small></div>
+        </div>
+    </div>
+
+    <h3 style="margin-top: 40px; font-size: 1rem; font-weight: 600; margin-bottom: 16px;">Intra-City Transport</h3>
+    <div class="grid-2">
+        <div class="info-box">
+            <h3><span class="ib-dot" style="background:var(--blue)"></span>Metro / Subway</h3>
+            <ul>
+                <li>All four cities have excellent metro systems</li>
+                <li>¥3–8 per ride ($0.40–$1.10)</li>
+                <li>Alipay/WeChat Pay QR codes — no tickets needed</li>
+                <li>Best for: universities, cultural sites, general transit</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3><span class="ib-dot" style="background:var(--green)"></span>Charter Bus</h3>
+            <ul>
+                <li>¥2,500–3,500/day ($345–$480) for 45-seat bus + driver</li>
+                <li>Essential for suburban factories (Yizhuang, Pingshan, Dongguan, Yangshan)</li>
+                <li>Budget assumes charter bus for 60% of program days</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3><span class="ib-dot" style="background:var(--purple)"></span>DiDi Ride-Hailing</h3>
+            <ul>
+                <li>China's Uber — works in all four cities</li>
+                <li>¥15–60 per ride ($2–$8) within city</li>
+                <li>Useful for small-group breakout activities</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3><span class="ib-dot" style="background:var(--red)"></span>Apollo Go Robotaxi</h3>
+            <ul>
+                <li>Baidu's autonomous ride-hailing — Beijing only</li>
+                <li>¥4–25 per ride (heavily subsidized)</li>
+                <li>Book 2–3 rides for fellows on Baidu visit day</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ BUDGET ═══════════ -->
+<section class="section" id="budget">
+    <div class="section-eyebrow">Financials</div>
+    <div class="section-title">Budget Estimate</div>
+    <div class="section-desc">Per-person costs for 35 days. All USD at ¥7.25 = $1. Mid-range quality: 3–4 star hotels, quality group meals.</div>
+
+    <table class="clean-table">
+        <thead>
+            <tr><th>Category</th><th>Details</th><th style="text-align:right">Per Person</th><th style="text-align:right">Total (40)</th></tr>
+        </thead>
+        <tbody>
+            <tr class="row-header"><td colspan="4">Accommodation — 34 nights, twin-share</td></tr>
+            <tr><td>Beijing (9 nights)</td><td>Haidian, near Tsinghua. Atour/Hanting Premium. ~¥400/room/night</td><td style="text-align:right">$248</td><td style="text-align:right">$9,931</td></tr>
+            <tr><td>Shanghai (8 nights)</td><td>Zhangjiang/Pudong. Ji Hotel/Atour. ~¥450/room/night</td><td style="text-align:right">$248</td><td style="text-align:right">$9,931</td></tr>
+            <tr><td>Hangzhou (5 nights)</td><td>Binjiang. Orange Hotel/Atour. ~¥380/room/night</td><td style="text-align:right">$131</td><td style="text-align:right">$5,241</td></tr>
+            <tr><td>Shenzhen (9+ nights)</td><td>Nanshan. Atour/Lavande. ~¥420/room/night</td><td style="text-align:right">$261</td><td style="text-align:right">$10,441</td></tr>
+            <tr class="row-sub"><td colspan="2">Accommodation Subtotal</td><td style="text-align:right">$889</td><td style="text-align:right">$35,545</td></tr>
+
+            <tr class="row-header"><td colspan="4">Meals — 35 days</td></tr>
+            <tr><td>Breakfasts</td><td>Hotel buffet included mostly; budget 10 external @ ¥30/pp</td><td style="text-align:right">$41</td><td style="text-align:right">$1,655</td></tr>
+            <tr><td>Lunches</td><td>20 paid lunches @ ¥60/pp (company-hosted lunches often free)</td><td style="text-align:right">$166</td><td style="text-align:right">$6,621</td></tr>
+            <tr><td>Dinners</td><td>25 organized dinners @ ¥100/pp average</td><td style="text-align:right">$345</td><td style="text-align:right">$13,793</td></tr>
+            <tr><td>Special dinners</td><td>4 events (welcome, Peking duck, river cruise, farewell) @ ¥250/pp</td><td style="text-align:right">$138</td><td style="text-align:right">$5,517</td></tr>
+            <tr class="row-sub"><td colspan="2">Meals Subtotal</td><td style="text-align:right">$690</td><td style="text-align:right">$27,586</td></tr>
+
+            <tr class="row-header"><td colspan="4">Transport</td></tr>
+            <tr><td>High-speed rail</td><td>BJ→SH (¥553) + SH→HZ (¥73) + HZ→SZ (¥707) + SZ↔GZ (¥150 RT)</td><td style="text-align:right">$204</td><td style="text-align:right">$8,166</td></tr>
+            <tr><td>Charter bus</td><td>45-seat bus, ~22 days @ ¥3,000/day</td><td style="text-align:right">$228</td><td style="text-align:right">$9,103</td></tr>
+            <tr><td>Metro & local</td><td>~¥40/pp/day × 35 days</td><td style="text-align:right">$193</td><td style="text-align:right">$7,724</td></tr>
+            <tr><td>Airport transfers</td><td>2 transfers × ¥150/pp</td><td style="text-align:right">$41</td><td style="text-align:right">$1,655</td></tr>
+            <tr class="row-sub"><td colspan="2">Transport Subtotal</td><td style="text-align:right">$666</td><td style="text-align:right">$26,648</td></tr>
+
+            <tr class="row-header"><td colspan="4">Activities &amp; Program</td></tr>
+            <tr><td>Cultural activities</td><td>Great Wall, Forbidden City, West Lake, museums, temples</td><td style="text-align:right">$41</td><td style="text-align:right">$1,655</td></tr>
+            <tr><td>Workshop materials</td><td>RoboMaster rental, hackathon supplies, Huaqiangbei budget</td><td style="text-align:right">$35</td><td style="text-align:right">$1,379</td></tr>
+            <tr><td>Guest speakers</td><td>6–8 speakers @ ¥2,000–5,000 each</td><td style="text-align:right">$14</td><td style="text-align:right">$552</td></tr>
+            <tr><td>Visit facilitation</td><td>5 paid visits @ ¥5,000 each</td><td style="text-align:right">$86</td><td style="text-align:right">$3,448</td></tr>
+            <tr><td>Capstone event</td><td>Venue, AV, judges, prizes, certificates, photography</td><td style="text-align:right">$52</td><td style="text-align:right">$2,069</td></tr>
+            <tr class="row-sub"><td colspan="2">Activities Subtotal</td><td style="text-align:right">$228</td><td style="text-align:right">$9,103</td></tr>
+
+            <tr class="row-header"><td colspan="4">Staff &amp; Operations</td></tr>
+            <tr><td>Program director</td><td>1 bilingual director, 6 weeks (incl. prep)</td><td style="text-align:right">$207</td><td style="text-align:right">$8,276</td></tr>
+            <tr><td>Local coordinators</td><td>1 per city (4 total), 2 weeks each @ ¥15,000</td><td style="text-align:right">$207</td><td style="text-align:right">$8,276</td></tr>
+            <tr><td>Interpreters</td><td>2 professional EN↔CN, full program @ ¥2,000/day each</td><td style="text-align:right">$483</td><td style="text-align:right">$19,310</td></tr>
+            <tr><td>Insurance</td><td>Group travel + medical, 40 pax + 3 staff</td><td style="text-align:right">$50</td><td style="text-align:right">$2,150</td></tr>
+            <tr><td>SIM cards</td><td>Chinese SIMs with data for 20 American fellows</td><td style="text-align:right">$14</td><td style="text-align:right">$552</td></tr>
+            <tr><td>Contingency (10%)</td><td>Buffer for unexpected costs</td><td style="text-align:right">$243</td><td style="text-align:right">$9,710</td></tr>
+            <tr class="row-sub"><td colspan="2">Staff &amp; Ops Subtotal</td><td style="text-align:right">$1,203</td><td style="text-align:right">$48,124</td></tr>
+
+            <tr class="row-total"><td colspan="2">Total Per Person</td><td style="text-align:right">$3,676</td><td style="text-align:right">$147,006</td></tr>
+        </tbody>
+    </table>
+
+    <p style="margin-top: 16px; font-size: 0.8rem; color: var(--text-tertiary); line-height: 1.6;">
+        <strong style="color:var(--text-secondary)">Not included:</strong> International airfare (~$800–1,500 RT), visa fees (~$185), personal spending, optional HK day trip, elective add-ons ($20–50/pp per module).<br>
+        <strong style="color:var(--text-secondary)">Cost reduction:</strong> University dorms save ~40% on accommodation. Many companies host lunch free. Apply for Schwarzman/USCET exchange grants.
+    </p>
+
+    <h3 style="margin-top: 40px; font-size: 1rem; font-weight: 600; margin-bottom: 4px;">Per-City Breakdown</h3>
+    <table class="clean-table">
+        <thead>
+            <tr><th>City</th><th style="text-align:center">Days</th><th style="text-align:right">Lodging</th><th style="text-align:right">Meals</th><th style="text-align:right">Transport</th><th style="text-align:right">Activities</th><th style="text-align:right">Per Person</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Beijing</td><td style="text-align:center">10</td><td style="text-align:right">$248</td><td style="text-align:right">$210</td><td style="text-align:right">$85</td><td style="text-align:right">$75</td><td style="text-align:right"><strong>$618</strong></td></tr>
+            <tr><td>Shanghai</td><td style="text-align:center">9</td><td style="text-align:right">$248</td><td style="text-align:right">$195</td><td style="text-align:right">$80</td><td style="text-align:right">$60</td><td style="text-align:right"><strong>$583</strong></td></tr>
+            <tr><td>Hangzhou</td><td style="text-align:center">6</td><td style="text-align:right">$131</td><td style="text-align:right">$130</td><td style="text-align:right">$50</td><td style="text-align:right">$45</td><td style="text-align:right"><strong>$356</strong></td></tr>
+            <tr><td>Shenzhen</td><td style="text-align:center">10</td><td style="text-align:right">$261</td><td style="text-align:right">$210</td><td style="text-align:right">$90</td><td style="text-align:right">$80</td><td style="text-align:right"><strong>$641</strong></td></tr>
+            <tr class="row-sub"><td>Inter-city rail</td><td style="text-align:center">—</td><td colspan="3"></td><td style="text-align:right">$204</td><td style="text-align:right"><strong>$204</strong></td></tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- ═══════════ LOGISTICS ═══════════ -->
+<section class="section" id="logistics">
+    <div class="section-eyebrow">Operations</div>
+    <div class="section-title">Logistics &amp; Practical Notes</div>
+
+    <div class="grid-2">
+        <div class="info-box">
+            <h3><span class="ib-dot" style="background:var(--red)"></span>Visa Requirements</h3>
+            <ul>
+                <li>US citizens need Chinese visa — F-type (exchange) recommended</li>
+                <li>Requires invitation letter from Chinese partner org</li>
+                <li>Processing: 4–7 business days, ~$185</li>
+                <li>Partner with Tsinghua or similar university for invitation letters</li>
+                <li>Chinese participants register with local police within 24h of hotel changes</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3><span class="ib-dot" style="background:var(--blue)"></span>Accommodation</h3>
+            <ul>
+                <li>Twin-share rooms (20 rooms/city). Pair American + Chinese as roommates</li>
+                <li>Book Chinese brands: Atour (亚朵), Ji Hotel (全季), Orange (桔子)</li>
+                <li>Clean, modern, well-located — not backpacker hostels</li>
+                <li>Alternative: university guest houses (cheaper, less reliable)</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3><span class="ib-dot" style="background:var(--green)"></span>Payments &amp; Money</h3>
+            <ul>
+                <li>China is almost entirely cashless — Alipay and WeChat Pay</li>
+                <li>Alipay now accepts foreign credit cards — set up before arrival</li>
+                <li>Visa/Mastercard NOT reliable for daily use</li>
+                <li>Program carries ¥20,000 cash as emergency backup</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3><span class="ib-dot" style="background:var(--purple)"></span>Internet &amp; VPN</h3>
+            <ul>
+                <li>Google, Instagram, X, WhatsApp are blocked in China</li>
+                <li>Provide Chinese SIM cards + VPN recommendation</li>
+                <li>Group comms via WeChat (essential in China)</li>
+                <li>Pre-departure: download WeChat, Alipay, DiDi, Baidu Maps</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3><span class="ib-dot" style="background:var(--orange)"></span>Health &amp; Safety</h3>
+            <ul>
+                <li>All four cities are very safe (among lowest violent crime globally)</li>
+                <li>Summer heat: up to 35°C+ in SH/HZ/SZ. Schedule outdoors for mornings</li>
+                <li>Air quality: check AQI daily, provide N95s for AQI > 150</li>
+                <li>International clinics in each city (e.g., United Family Hospital)</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3><span class="ib-dot" style="background:var(--teal)"></span>Planning Timeline</h3>
+            <ul>
+                <li><strong>T-6 months:</strong> Secure Chinese partner, begin company outreach</li>
+                <li><strong>T-4 months:</strong> Open applications for American fellows</li>
+                <li><strong>T-3 months:</strong> Select cohort, begin visa process</li>
+                <li><strong>T-2 months:</strong> Confirm visits, book hotels &amp; trains</li>
+                <li><strong>T-1 month:</strong> Pre-departure orientation (virtual)</li>
+            </ul>
+        </div>
+        <div class="info-box" style="grid-column: 1 / -1;">
+            <h3><span class="ib-dot" style="background:var(--gold)"></span>Potential Partner Organizations</h3>
+            <ul style="columns: 2; column-gap: 32px;">
+                <li>Schwarzman Scholars (Tsinghua) — alumni network, venue access</li>
+                <li>US-China Exchange Foundation (USCEF) — funding, institutional support</li>
+                <li>National Committee on US-China Relations — credibility, government ties</li>
+                <li>Local American Chambers of Commerce (AmCham) in each city</li>
+                <li>Chinese People's Association for Friendship with Foreign Countries</li>
+                <li>China-United States Exchange Foundation — people-to-people focus</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ DIRECTORY ═══════════ -->
+<section class="section" id="directory">
+    <div class="section-eyebrow">Reference</div>
+    <div class="section-title">Full Company Directory</div>
+    <div class="section-desc">All 30+ companies and institutions, organized by sector.</div>
+
+    <div style="overflow-x: auto;">
+    <table class="dir-table">
+        <thead><tr><th>Company</th><th>City</th><th>Sector</th><th>Why Included</th></tr></thead>
+        <tbody>
+            <tr class="cat-row"><td colspan="4" style="background:var(--blue-light);color:var(--blue);">AI &amp; Foundation Models</td></tr>
+            <tr><td>DeepSeek 深度求索</td><td>Hangzhou</td><td>LLMs</td><td>Most significant AI lab globally in 2025; efficient training breakthrough</td></tr>
+            <tr><td>Zhipu AI 智谱AI</td><td>Beijing</td><td>LLMs</td><td>Tsinghua spinoff; open-source GLM; academic-to-industry pipeline</td></tr>
+            <tr><td>Moonshot AI 月之暗面</td><td>Beijing</td><td>Consumer AI</td><td>Fastest-growing Chinese AI startup; long-context pioneer (Kimi)</td></tr>
+            <tr><td>MiniMax 稀宇科技</td><td>Shanghai</td><td>Multimodal</td><td>Video generation (Hailuo); character AI (Talkie, 30M+ users)</td></tr>
+            <tr><td>StepFun 阶跃星辰</td><td>Shanghai</td><td>Multimodal</td><td>MSRA-to-startup pipeline; video understanding focus</td></tr>
+            <tr><td>Baidu 百度</td><td>Beijing</td><td>AD · LLMs</td><td>Apollo Go robotaxis; at-scale L4 autonomy</td></tr>
+            <tr><td>ByteDance 字节跳动</td><td>Beijing</td><td>Rec AI</td><td>World's most successful recommendation algorithm; Doubao LLM</td></tr>
+
+            <tr class="cat-row"><td colspan="4" style="background:var(--purple-light);color:var(--purple);">Robotics</td></tr>
+            <tr><td>Unitree 宇树科技</td><td>Hangzhou</td><td>Quadruped/Humanoid</td><td>10x cheaper than Boston Dynamics; viral global presence</td></tr>
+            <tr><td>UBTECH 优必选</td><td>Shenzhen</td><td>Humanoid</td><td>First humanoid robot IPO; real factory deployments</td></tr>
+            <tr><td>Megvii 旷视科技</td><td>Beijing</td><td>CV · Logistics</td><td>Face++ pivot to industrial robotics; ethics discussion</td></tr>
+            <tr><td>JAKA 节卡机器人</td><td>Shanghai</td><td>Cobots</td><td>China's leading cobot maker; hands-on interaction</td></tr>
+            <tr><td>DJI 大疆</td><td>Shenzhen</td><td>Drones</td><td>70%+ global drone share; RoboMaster education</td></tr>
+            <tr><td>Xiaomi 小米</td><td>Beijing</td><td>Consumer Robotics</td><td>CyberDog, CyberOne; dark factory tour</td></tr>
+
+            <tr class="cat-row"><td colspan="4" style="background:var(--green-light);color:var(--green);">Electric Vehicles &amp; Autonomous Driving</td></tr>
+            <tr><td>BYD 比亚迪</td><td>Shenzhen</td><td>EV Manufacturing</td><td>World's #1 EV maker; vertical integration</td></tr>
+            <tr><td>NIO 蔚来</td><td>Shanghai</td><td>Smart EVs</td><td>AD test rides; battery swap demo</td></tr>
+            <tr><td>XPeng 小鹏</td><td>Guangzhou</td><td>AD · eVTOL</td><td>Flying car prototype; most advanced city-level AD</td></tr>
+
+            <tr class="cat-row"><td colspan="4" style="background:var(--pink-light);color:var(--pink);">Tech Platforms</td></tr>
+            <tr><td>Alibaba/DAMO 达摩院</td><td>Hangzhou</td><td>AI · E-Commerce</td><td>Qwen LLMs; Cainiao logistics robots</td></tr>
+            <tr><td>Tencent 腾讯</td><td>Shenzhen</td><td>AI · Social</td><td>Robotics X Lab; WeChat; Hunyuan LLM</td></tr>
+            <tr><td>Ant Group 蚂蚁集团</td><td>Hangzhou</td><td>Fintech</td><td>900M+ Alipay users; AI financial inclusion</td></tr>
+            <tr><td>Hikvision 海康威视</td><td>Hangzhou</td><td>AIoT</td><td>World's #1 surveillance; robotics pivot under sanctions</td></tr>
+            <tr><td>Huawei 华为</td><td>Shenzhen</td><td>AI Chips · OS</td><td>Ascend chips; HarmonyOS; self-reliance narrative</td></tr>
+
+            <tr class="cat-row"><td colspan="4" style="background:var(--orange-light);color:var(--orange);">Research Institutions</td></tr>
+            <tr><td>Tsinghua University</td><td>Beijing</td><td>AI Research</td><td>AIR, Yao Class (Cross-Information Institute)</td></tr>
+            <tr><td>Peking University</td><td>Beijing</td><td>AI Research</td><td>Institute for AI; Wangxuan Institute</td></tr>
+            <tr><td>Fudan University</td><td>Shanghai</td><td>CS · AI</td><td>Qi Zhi Institute (Turing Award connection)</td></tr>
+            <tr><td>Zhejiang University</td><td>Hangzhou</td><td>Robotics</td><td>Top robotics program in China</td></tr>
+            <tr><td>BAAI 北京智源</td><td>Beijing</td><td>Gov AI Lab</td><td>National AI lab equivalent; governance perspective</td></tr>
+            <tr><td>Shanghai AI Lab</td><td>Shanghai</td><td>Open Research</td><td>InternLM; OpenCompass; government-backed open source</td></tr>
+            <tr><td>CAS Automation</td><td>Beijing</td><td>Robotics</td><td>Government pipeline feeding China's robotics boom</td></tr>
+            <tr><td>SIAT</td><td>Shenzhen</td><td>BCI · Biomedical</td><td>Brain-computer interfaces; surgical robotics</td></tr>
+
+            <tr class="cat-row"><td colspan="4" style="background:var(--teal-light);color:var(--teal);">Elective Module Companies</td></tr>
+            <tr><td>WuXi AppTec 药明康德</td><td>Shanghai</td><td>Biotech CRO</td><td>World's largest pharma services; BIOSECURE debate</td></tr>
+            <tr><td>BGI 华大基因</td><td>Shenzhen</td><td>Genomics</td><td>China's gene sequencers; broke Illumina monopoly</td></tr>
+            <tr><td>CATL 宁德时代</td><td>Shanghai area</td><td>Batteries</td><td>37% global battery share; sodium-ion</td></tr>
+            <tr><td>Foxconn 富士康</td><td>Shenzhen</td><td>Mfg</td><td>iPhone assembly; automation transformation</td></tr>
+        </tbody>
+    </table>
+    </div>
+</section>
+
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+    <p><strong>China Frontiers</strong> — Robotics, AI &amp; Innovation Exchange</p>
+    <p style="margin-top:6px">A people-to-people exchange for the next generation of cross-border leaders.</p>
+    <p style="margin-top:16px;font-size:0.7rem;opacity:0.6">Draft itinerary · Summer 2026 · Company visits subject to confirmation · Budget based on 2025 pricing</p>
+</footer>
+
+<!-- Back to top -->
+<button class="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<script>
+// ═══ TOGGLE SECTIONS ═══
+function toggleSection(id) {
+    const el = document.getElementById(id);
+    const btn = el.previousElementSibling;
+    el.classList.toggle('open');
+    btn.classList.toggle('open');
+}
+
+// ═══ MODULE TABS ═══
+function showMod(id, tab) {
+    document.querySelectorAll('.mod-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.mod-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('mod-' + id).classList.add('active');
+    tab.classList.add('active');
+}
+
+// ═══ SCROLL TRACKING ═══
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav a');
+const btt = document.querySelector('.btt');
+const progressBar = document.getElementById('progressBar');
+const navWrap = document.querySelector('.nav-wrap');
+
+function onScroll() {
+    const y = scrollY;
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+
+    // Progress bar
+    const pct = Math.min((y / docH) * 100, 100);
+    progressBar.style.width = pct + '%';
+
+    // Back to top
+    btt.classList.toggle('show', y > 600);
+
+    // Nav shadow
+    navWrap.classList.toggle('scrolled', y > 10);
+
+    // Active nav link
+    let current = '';
+    sections.forEach(s => { if (y >= s.offsetTop - 100) current = s.id; });
+    navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// ═══ SCROLL REVEAL (Intersection Observer) ═══
+(function() {
+    // Auto-tag elements for reveal
+    const selectors = [
+        '.city',
+        '.section-title',
+        '.section-eyebrow',
+        '.section-desc',
+        '.callout',
+        '.week-div',
+        '.toggle-btn',
+        '.route-card',
+        '.info-box',
+        '.mod-tabs',
+        '.clean-table',
+        '.dir-table'
+    ];
+    selectors.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => {
+            if (!el.classList.contains('reveal') && !el.closest('.stagger-children')) {
+                el.classList.add('reveal');
+            }
+        });
+    });
+
+    // Also tag day rows with stagger
+    document.querySelectorAll('.city-body').forEach(body => {
+        const days = body.querySelectorAll('.day-row');
+        // We'll observe them individually
+        days.forEach(d => d.classList.add('reveal'));
+    });
+
+    // Tag grids (co-grid, grid-2, grid-4, transport-grid) as stagger-children
+    document.querySelectorAll('.co-grid, .grid-4, .grid-2:not(.stagger-children)').forEach(g => {
+        // Only outside toggle-content (those are hidden)
+        if (!g.closest('.toggle-content')) {
+            g.classList.add('stagger-children');
+        }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll('.reveal, .stagger-children').forEach(el => observer.observe(el));
+})();
+
+// ═══ ANIMATED COUNTERS ═══
+(function() {
+    const counters = document.querySelectorAll('[data-count]');
+    const duration = 1200;
+
+    function animateCounter(el) {
+        const target = parseInt(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        const start = performance.now();
+
+        function update(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.round(eased * target);
+            el.textContent = current + suffix;
+            if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+    }
+
+    // Start counters after hero loads
+    setTimeout(() => counters.forEach(animateCounter), 600);
+})();
+
+// ═══ SMOOTH NAV CLICK ═══
+navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+
+// ═══ KEYBOARD NAV ═══
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        // Close any open toggles
+        document.querySelectorAll('.toggle-content.open').forEach(el => {
+            el.classList.remove('open');
+            el.previousElementSibling.classList.remove('open');
+        });
+    }
+});
+</script>
+
+</body>
+</html>
